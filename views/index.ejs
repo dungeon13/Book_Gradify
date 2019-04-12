@@ -1,0 +1,20 @@
+<% include ./header.ejs %>
+        <div class="container">
+            <div class="row">
+                <% if(allbooks.length !=0){ %>
+                    <% allbooks.forEach(function(book){ %>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="img-thumbnail">
+                                <img src="<%= book.image %>" alt="<%= book.name %>" style="width:100%;">
+                                <a href="/books/<%= book._id %>"><button class="btn btn-success btn-lg">More</button></a>
+                            </div>
+                        </div>
+                    <% }) %>
+                <% }else{ %>
+                    <h1>No Books</h1>
+                <% } %>
+                
+            </div>
+        </div>
+
+        <% include ./footer.ejs %>

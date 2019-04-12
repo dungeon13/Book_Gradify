@@ -1,0 +1,68 @@
+body{
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.02em;
+}
+
+#brand{
+    font-family: 'Roboto', sans-serif;
+    
+}
+.image{
+    width: 500px;
+    height: 500px;
+}
+.footer{
+    margin-top: auto;
+    height: 70px;
+    position: relative;
+    left: 0;
+    bottom: 0;
+    background:gainsboro;
+    text-align: center;
+    width: 100%;
+}
+.item img{
+    width: 50px;
+    height: 50px;
+}
+.list ul{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 40px;
+}
+
+.multi-item-carousel{
+    .carousel-inner{
+      > .item{
+        transition: 500ms ease-in-out left;
+      }
+      .active{
+        &.left{
+          left:-33%;
+        }
+        &.right{
+          left:33%;
+        }
+      }
+      .next{
+        left: 33%;
+      }
+      .prev{
+        left: -33%;
+      }
+      @media all and (transform-3d), (-webkit-transform-3d) {
+        > .item{
+          // use your favourite prefixer here
+          transition: 500ms ease-in-out left;
+          transition: 500ms ease-in-out all;
+          backface-visibility: visible;
+          transform: none!important;
+        }
+      }
+    }
+    .carouse-control{
+      &.left, &.right{
+        background-image: none;
+      }
+    }
+  }

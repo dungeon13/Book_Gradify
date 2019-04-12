@@ -1,0 +1,39 @@
+<% include ../header.ejs %>
+<div class="container">
+    <div class="row">
+                
+            <form action="/books" method="POST">
+                <h1>Adding new Book</h1>
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="name" name="book[name]">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="image url" name="book[image]">
+                </div>
+                
+                <div class="form-group">
+                        <input class="form-control" type="text" placeholder="author" name="book[author]">
+                    </div>
+                <div class="form-group">
+                            <input class="form-control" type="text" placeholder="rating" name="book[rating]">
+                </div>
+                <div class="form-group">
+                        <input class="form-control" type="text" placeholder="language" name="book[language]">
+                </div>
+                <div class="form-group">
+                        <input class="form-control" type="text" placeholder="genre" name="book[genre]">
+                </div>
+                <div class="form-group">
+                        <input class="form-control" type="text" placeholder="buy link" name="book[buylink]">
+                </div>
+                <div class="form-group">
+                        <input class="form-control" type="text" placeholder="description" name="book[description]" >
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-outline-primary btn-block">Submit</button>
+                </div>
+                
+            </form>
+    </div>
+</div>
+<% include ../footer.ejs %>
