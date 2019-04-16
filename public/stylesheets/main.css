@@ -31,38 +31,57 @@ body{
     font-size: 40px;
 }
 
-.multi-item-carousel{
-    .carousel-inner{
-      > .item{
-        transition: 500ms ease-in-out left;
-      }
-      .active{
-        &.left{
-          left:-33%;
-        }
-        &.right{
-          left:33%;
-        }
-      }
-      .next{
-        left: 33%;
-      }
-      .prev{
-        left: -33%;
-      }
-      @media all and (transform-3d), (-webkit-transform-3d) {
-        > .item{
-          // use your favourite prefixer here
-          transition: 500ms ease-in-out left;
-          transition: 500ms ease-in-out all;
-          backface-visibility: visible;
-          transform: none!important;
-        }
-      }
-    }
-    .carouse-control{
-      &.left, &.right{
-        background-image: none;
-      }
-    }
-  }
+.form-inline{
+  margin-left: 20px;
+}
+
+.rating{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%) rotateY(180deg);
+  display: flex;
+}
+.rating input{
+  display: none;
+}
+.rating label{
+  display:block;
+  cursor: pointer;
+  width: 30px;
+  
+}
+.rating label:before{
+  content: '\f005';
+  font-family: fontAwesome;
+  position: relative;
+  display: block;
+  font-size: 30px;
+  color: #ccc;
+  
+}
+.rating label:after{
+  content: '\f005';
+  font-family: fontAwesome;
+  position: absolute;
+  display: block;
+  font-size: 30px;
+  color: gold;
+  top: 0;
+  opacity: 0;
+  transition: 0.5s;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7)
+}
+.rating label:hover:after,
+.rating label:hover ~ label:after,
+.rating input:checked ~ label:after{
+  opacity: 1;
+}
+.rate{
+  content: '\f005';
+  font-family: fontAwesome;
+  position: relative;
+  display: block;
+  font-size: 30px;
+  color: #ccc;
+}

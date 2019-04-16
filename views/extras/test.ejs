@@ -1,0 +1,42 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+    <title>Auto complete using Pure Javascript</title> 
+</head> 
+<body>
+    
+      
+     <% var n= books.length; //length of datalist tags %>     
+  
+     <% function ac(value) { %>
+        <% document.getElementById('datalist').innerHTML = ''; %>
+           
+         <% l=value.length; %> 
+    <% for (var i = 0; i<n; i++) { %>
+         <% if(((tags[i].toLowerCase()).indexOf(value.toLowerCase()))>-1) %>
+         <% { %> 
+              
+  
+             <% var node = document.createElement("option");  %>
+             <% var val = document.createTextNode(tags[i]); %>
+             <% node.appendChild(val); %>
+  
+              <% document.getElementById("datalist").appendChild(node); %>
+            <% } %>
+        <% } %>
+    <% } %>
+   
+
+<form method="POST" action="/test">
+<input type="text" list="datalist" name="input" onkeyup="ac(this.value)"> 
+<!-- On keyup calls the function everytime a key is released -->
+<datalist id="datalist"> 
+    <% books.forEach(function(book){ %>
+        <option value="<%= book.name %>"></option>
+        <% }) %>  
+<!-- This data list will be edited through javascript     -->
+</datalist> 
+<button type="submit" class="btn btn-primary">Search</button>
+</form>
+</body> 
+</html> 

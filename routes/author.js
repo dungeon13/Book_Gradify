@@ -3,9 +3,26 @@ var router = express.Router();
 var Author  = require("../models/author");
 
 router.get("/",function(req,res){
-    res.render("./author/authors")
+    Author.find({},function(err,authors){
+        if(err){
+            console.log(err)
+        }else{
+            
+            res.render("./author/authors",{authors:authors})
+        }
+    })
+    
 })
-
+router.get("/detail/:id",function(req,res){
+    Author.findById(req.params.id,function(err,author){
+        if(err){
+            console.log(err)
+        }else{
+            res.render("./author/authordetail",{author:author})
+        }
+    })
+    
+})
 router.get("/new",function(req,res){
     res.render("./author/newAuthor")
 })
@@ -15,7 +32,7 @@ router.post("/",function(req,res){
             console.log(err)
             res.redirect("back")
         }else{
-            console.log("Created: "+info)
+            
             res.redirect("/authors")
         }
     })

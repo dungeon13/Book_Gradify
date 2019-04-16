@@ -2,7 +2,7 @@
 <h1>Select the Author</h1>
 <% authors.forEach(function(author){ %>
     <ul>
-        <a href="/authors/detail/<%= author.id %>"><li><%= author.name %></li></a>
+        <a href="/books/new/<%= author.id %>/book"><li><%= author.name %></li></a>
     </ul>
     <a href="https://www.twitter.com/" target="_blank"><i class="fab fa-twitter-square"></i></a>
 <% }) %>

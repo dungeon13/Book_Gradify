@@ -1,0 +1,12 @@
+<% include ../header.ejs %>
+<% if(book !==null){ %>
+    <h1><%= book.name %></h1>
+    <div class="container">
+        <a href="/books/<%= book.id %>">
+            <img src="<%= book.image %>">
+        </a>
+    </div>
+<% }else{ %>
+    <h2>Book not found</h2>
+<% } %>
+

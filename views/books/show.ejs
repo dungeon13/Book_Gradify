@@ -5,11 +5,24 @@
                 <p><%= foundBook.name %></p>
         </div>
         <div class="col">
-            <p><i class="far fa-star"></i><%= foundBook.rating %>/10</p>
+            <p><span style="color:gold;"><i class="fas fa-star"></i></span><%= foundBook.rating.total %>/5</p>
         </div>
-        <div class="col">
-            <button type="button" class="btn btn-success">Rate This Book</button>
-        </div>
+        <% if(currentUser){ %>
+            <div class="col">
+                    <form method="POST" action="/books/<%= foundBook.id %>">
+                        <div class="rating">
+                            <input type="radio" name="star" id="star1" value="5"><label for="star1"></label>
+                            <input type="radio" name="star" id="star2" value="4"><label for="star2"></label>
+                            <input type="radio" name="star" id="star3" value="3"><label for="star3"></label>
+                            <input type="radio" name="star" id="star4" value="2"><label for="star4"></label>
+                            <input type="radio" name="star" id="star5" value="1"><label for="star5"></label>
+                        </div>
+                        <% var val = ('input[name="star"]:checked').value %>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+                </div>
+        <% } %>
+        
     </div>
     <hr>
     <div class="row">
@@ -25,7 +38,7 @@
                     Author: <%= foundBook.author %>
                 </ul>
                 <ul>
-                    Buy Link: <a href="<%= foundBook.buylink %>"><i class="fab fa-amazon fa-1x"></i></a>
+                    Buy Link: <a href="<%= foundBook.buylink %>" target="_blank"><i class="fab fa-amazon fa-1x"></i></a>
                 </ul>
             </div>
         </div>
@@ -44,6 +57,24 @@
     <% }) %>
     <div class="row">
         <h2><u>Similiar Books</u></h2>
+        <div class="container-fluid">
+                <div class="row">
+                        <div class="owl-carousel owl-theme">
+                            <% books.forEach(function(book){ %>
+                                <% if(book.id != foundBook.id){ %>
+                                    <div class="item">
+                                            <a href="/books/<%= book.id %>">
+                                                    <img src="<%= book.image %>" title="<%= book.name %>">
+                                            </a>
+                                            </div>
+                               <% } %>
+                                
+                            <% }) %>
+                                
+                                
+                        </div>
+                </div>
+            </div>
     </div>
     <hr>
     <div class="row">
@@ -98,4 +129,33 @@
     <br>
     <br>
 </div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+                    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
+                    crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" 
+                    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                    crossorigin="a<img src=""></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" 
+                    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                    crossorigin="anonymous"></script>
+            <script type="text/javascript" src="/scripts/owl.carousel.js"></script>
+            <script type="text/javascript" src="/scripts/owl.carousel.min.js"></script>
+            <script>
+                $('.owl-carousel').owlCarousel({
+                    loop:true,
+                    margin:10,
+                    nav:true,
+                    responsive:{
+                        0:{
+                            items:1
+                        },
+                        600:{
+                            items:3
+                        },
+                        1000:{
+                            items:6
+                        }
+                    }
+                })
+            </script>
 <% include ../footer.ejs %>

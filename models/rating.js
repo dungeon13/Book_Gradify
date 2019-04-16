@@ -2,17 +2,20 @@ var mongoose = require("mongoose")
 
 var rateSchema = new mongoose.Schema({
     user:{
-        id:mongoose.Schema.Types.ObjectId,
-        ref:"User"
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"User"
     },
-    book:{
-        id:mongoose.Schema.Types.ObjectId,
-        ref:"Books"
-    },
-    rating:{
-        type:String,
-        required:true
-    }
+    book:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"Books"
+        }
+    ],
+    rating:[
+        {
+            type:String
+        }
+    ]
 })
 
-module.exports = mongoose.Model("Ratings",rateSchema)
+module.exports = mongoose.model("Ratings",rateSchema)
