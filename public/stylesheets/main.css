@@ -8,9 +8,22 @@ body{
     font-family: 'Roboto', sans-serif;
     
 }
+.list{
+  display: inline;
+  width: 100%;
+  height: auto;
+  
+}
+.indeximage{
+  width: 100%;
+  height: 80%;
+}
 .image{
     width: 500px;
     height: 500px;
+}
+.search:hover{
+  height: 50px;
 }
 .footer{
     margin-top: auto;
@@ -28,7 +41,7 @@ body{
 }
 .list ul{
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: 40px;
+    font-size: 30px;
 }
 
 .form-inline{
@@ -84,4 +97,14 @@ body{
   display: block;
   font-size: 30px;
   color: #ccc;
+}
+.active-pink .fa, .active-pink-2 .fa {
+  color: #f48fb1;
+}
+#select{
+  margin: 0 10px;
+  border-radius: 4px;
+}
+#select:focus{
+  border-radius: 4px; 
 }

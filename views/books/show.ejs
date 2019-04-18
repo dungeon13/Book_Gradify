@@ -1,12 +1,22 @@
 <% include ../header.ejs %>
+<% if(!currentUser){ %>
+    <div class="alert alert-danger" role="alert">You need to Login to add Reviews and Rating</div>
+<% } %>
 <div class="container-fluid">
     <div class="row">
         <div class="col title">
                 <p><%= foundBook.name %></p>
         </div>
-        <div class="col">
-            <p><span style="color:gold;"><i class="fas fa-star"></i></span><%= foundBook.rating.total %>/5</p>
-        </div>
+        <% if(foundBook.rating.total.toFixed(2)==0.00){ %>
+            <div class="col">
+                <p>Not rate yet</p>
+            </div>
+        <% }else{ %>
+            <div class="col">
+                    <p><span style="color:gold;"><i class="fas fa-star"></i></span><%= foundBook.rating.total.toFixed(2) %>/5</p>
+                </div>
+        <% } %>
+        
         <% if(currentUser){ %>
             <div class="col">
                     <form method="POST" action="/books/<%= foundBook.id %>">
@@ -27,10 +37,10 @@
     <hr>
     <div class="row">
         <div class="col-md-6">
-                <img class="image" src="<%= foundBook.image %>" alt="<%= foundBook.name %>">
+                <img class="img-thumbnail image" src="<%= foundBook.image %>" alt="<%= foundBook.name %>">
         </div>
-        <div class="col-md-6">
-            <div class="list">
+        <div class="col-md-6 container-fluid">
+            <div class="col-md-12 list">
                 <ul>
                     Genre: <%= foundBook.genre%> 
                 </ul>

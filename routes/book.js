@@ -24,6 +24,7 @@ router.post("/",function(req,res){
                 author.books.push(info)
                 author.save()
                 console.log("Created:  "+info._id)
+                req.flash("success","Book Added SuccessFully....")
                 res.redirect("/books")
             })
             //  Author.update(

@@ -1,12 +1,23 @@
 <% include ../header.ejs %>
-<% if(book !==null){ %>
-    <h1><%= book.name %></h1>
-    <div class="container">
-        <a href="/books/<%= book.id %>">
-            <img src="<%= book.image %>">
-        </a>
-    </div>
-<% }else{ %>
-    <h2>Book not found</h2>
-<% } %>
+<div class="row">
+        <div class="row col-md-12">
+<% if(info.length >0){ %>
+    
+    <% info.forEach(function(single){ %>
+        <% if(category=="book" || category=="category"){ %>
+            <div class="col-md-3">
+                    <a href="/<%= category %>s/<%= single.id %>"><img class="img-thumbnail" src="<%= single.image %>" style="width:150px;height:200px;"></a>
+                </div>
+        <% }else if(category=="author"){ %>
+            <div class="col-md-3">
+                    <a href="/<%= category %>s/detail/<%= single.id %>"><img class="img-thumbnail" src="<%= single.image %>" style="width:150px;height:200px;"></a>
+                </div>
+        <% } %>
+        
+    <% }) %>
 
+<% }else{ %>
+    <h1>Nothing is there</h1>
+<% } %>
+</div>
+</div>

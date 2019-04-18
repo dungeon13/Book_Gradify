@@ -30,9 +30,10 @@ router.post("/",function(req,res){
     Author.create(req.body.author,function(err,info){
         if(err){
             console.log(err)
+            req.flash("error","SomeThing went wrong.....")
             res.redirect("back")
         }else{
-            
+            req.flash("success","New Athor Added....")
             res.redirect("/authors")
         }
     })

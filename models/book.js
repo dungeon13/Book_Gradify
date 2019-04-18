@@ -18,7 +18,10 @@ var bookSchema = new mongoose.Schema({
             default:0
         }
     },
-    genre:String,
+    genre:{
+        type:String,
+        lowercase:true
+    },
     buylink:String,
     author:{
         // id:{

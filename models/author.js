@@ -5,6 +5,9 @@ var authorSchema = new mongoose.Schema({
         type:String,
         lowercase:true
     },
+    image:{
+        type:String
+    },
     nationality:{
         type:String,
         lowercase:true

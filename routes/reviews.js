@@ -25,6 +25,7 @@ router.post("/",function(req,res){
             Review.create(req.body.review,function(err,review){
                 if(err){
                     console.log(err)
+                    req.flash("error","SomeThing Went Wrong")
                     res.redirect("back")
                 }
                 else{
@@ -33,6 +34,7 @@ router.post("/",function(req,res){
                     review.save()
                     book.reviews.push(review)
                     book.save()
+                    req.flash("success","Review Added....")
                     res.redirect("/books/"+book._id)
                 }
             })

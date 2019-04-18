@@ -10,10 +10,12 @@ var bodyParser = require("body-parser")
 var methodOverride = require("method-override")
 var LocalStrategy = require("passport-local")
 var passport = require("passport")
+var flash = require("connect-flash")
 
 mongoose.set('useNewUrlParser',true)
 mongoose.set('useCreateIndex',true)
 app.use(bodyParser.urlencoded({extended:true}))
+app.use(flash());
 //Routes
 var reviewsRoutes = require("./routes/reviews")
 var bookRoutes = require("./routes/book")
@@ -39,6 +41,8 @@ passport.deserializeUser(User.deserializeUser())
 // passing info to all pages
 app.use(function(req,res,next){
     res.locals.currentUser = req.user
+    res.locals.error = req.flash("error")
+    res.locals.success = req.flash("success")
     next();
 })
 
@@ -56,6 +60,7 @@ app.post("/books/:id",function(req,res){
     Book.findById(req.params.id,function(err,book){
         if(err){
             console.log(err)
+            req.flash("error","SomeThing Went Wrong")
             res.redirect("/")
         }else{
             var ratinggot = req.body.star
@@ -73,11 +78,15 @@ app.post("/books/:id",function(req,res){
             Book.findByIdAndUpdate(req.params.id,condition,function(err,info){
                 if(err){
                     console.log(err)
+                    req.flash("error","SomeThing Went Wrong")
+                    res.redirect("/")
                 }else{
                     Rating.findOne({user:req.user._id},function(err,ratinginfo){
                         if(err){
                             console.log("error")
                             console.log(err)
+                            req.flash("error","SomeThing Went Wrong")
+                            res.redirect("/")
                         }else{
             
                             if(ratinginfo == null){
@@ -88,12 +97,14 @@ app.post("/books/:id",function(req,res){
                                     if(err){
                                         console.log("error in creating rate")
                                         console.log(err)
+                                        req.flash("error","SomeThing Went Wrong")
                                         res.redirect("back")
                                     }else{
                                         console.log("Rating created")
                                         created.book.push(req.params.id)
                                         created.rating.push(ratinggot)
                                         created.save()
+                                        req.flash("success","Rating Done....")
                                         res.redirect("back")
                                     }
                                 })
@@ -103,6 +114,7 @@ app.post("/books/:id",function(req,res){
                                         ratinginfo.book.push(req.params.id)
                                         ratinginfo.rating.push(ratinggot)
                                         ratinginfo.save()
+                                        req.flash("success","Rating Done.....")
                                         res.redirect("back")
                             }
                         }
@@ -118,22 +130,31 @@ app.post("/books/:id",function(req,res){
     
 })
 
-app.post("/test",function(req,res){
-    console.log(req.body.input)
+app.get("/test",function(req,res){
+    console.log(req.body)
     res.redirect("/")
 })
 app.post("/search",function(req,res){
-    var query = new RegExp("^"+req.body.name);
-        Book.findOne({name:query},function(err,book){
-            if(err){
-                console.log(err)
-            }else{
-                console.log(book)
-                res.render("extras/search",{book:book})
-            }
+    var category = req.body.search.category
+    var name = req.body.search.name
+    if(category=="book"){
+        Book.find({name:{ $regex:'.*' + name + '.*' }},function(err,info){
+            console.log(info)
+            // res.redirect("/")
+            res.render("extras/search",{info:info,category:category})
         })
-        // console.log(req.body.name)
-        // res.render("extras/search")
+    }else if(category=="author"){
+        Author.find({name:{ $regex:'.*' + name + '.*' }},function(err,info){
+            console.log(info)
+            res.render("extras/search",{info:info,category:category})
+        })
+    }else if(category=="category"){
+        Book.find({genre:{ $regex:'.*' + category + '.*' }},function(err,info){
+            console.log(info)
+            res.render("extras/search",{info:info,category:category})
+        })
+    }
+    // res.redirect("/")
 })
 
 
