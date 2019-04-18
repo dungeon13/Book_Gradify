@@ -48,7 +48,7 @@ app.use(function(req,res,next){
 
 app.use(express.static(__dirname+"/public"));
 app.set("view engine","ejs")
-mongoose.connect("mongodb://localhost/book_gradify",{useNewUrlParser:true})
+mongoose.connect("mongodb+srv://casanova:casanova%4012345@bookgradify-snu4a.mongodb.net/test?retryWrites=true",{useNewUrlParser:true})
 
 
 // Routes
