@@ -168,6 +168,4 @@ app.use("/user",userRoutes)
 
 
 
-app.listen(8080,function(){
-    console.log("Server is listening.........")
-})
+app.listen(process.env.PORT, process.env.IP);
